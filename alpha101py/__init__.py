@@ -26,10 +26,11 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     row = cursor.fetchone()
 
     while row:
-        print(row[0])
+        print(row[1])
         row = cursor.fetchone()
 
     return func.HttpResponse(
+
             'Success fetch',
             status_code=200
     )
