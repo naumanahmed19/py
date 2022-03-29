@@ -18,23 +18,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     db_token = ''
     connection_string = 'DRIVER='+driver+';SERVER='+server+';DATABASE='+database
     #When MSI is enabled
-    if os.getenv("MSI_SECRET"):
-        conn = pyodbc.connect(connection_string+';Authentication=ActiveDirectoryMsi')
+
+    conn = pyodbc.connect(connection_string+';Authentication=ActiveDirectoryMsi')
     
-    #Used when run from local
-    else:
-        SQL_COPT_SS_ACCESS_TOKEN = 1256
-
-        exptoken = b''
-        for i in bytes(db_token, "UTF-8"):
-            exptoken += bytes({i})
-            exptoken += bytes(1)
-
-        tokenstruct = struct.pack("=i", len(exptoken)) + exptoken
-        conn = pyodbc.connect(connection_string, attrs_before = { SQL_COPT_SS_ACCESS_TOKEN:tokenstruct })
-        # Uncomment below line when use username and password for authentication
-        # conn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
-
     cursor = conn.cursor()
     cursor.execute(query) 
     row = cursor.fetchone()
@@ -44,6 +30,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         row = cursor.fetchone()
 
     return func.HttpResponse(
-            'Success',
+            'Success fetch',
             status_code=200
     )
