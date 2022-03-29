@@ -7,7 +7,7 @@ import struct
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
-    server="alpha101py.azurewebsites.net"
+    server="alpha101.database.windows.net"
     database="alpha101"
     driver="{ODBC Driver 17 for SQL Server}"
     query="SELECT * FROM dbo.Goal"
