@@ -9,7 +9,8 @@
       "methods": [
         "get",
         "post"
-      ]
+      ],
+      "route": "goals/{id:int?}"
     },
     {
       "type": "http",
